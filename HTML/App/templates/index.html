@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Jadwal - Bipol Tracker</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../static/img/favicon.png" rel="icon">
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../static/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="../static/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="../static/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../static/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../static/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.4.1
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="navbar-brand">
+        <img src="../static/img/logo.png" class="img-fluid" alt="logo" width="100" height="100" class="d-inline-block align-text-top">
+      </a>
+
+    </div><!-- End Logo -->
+
+
+    <nav class="navbar-expand-lg header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+        <li class="nav-item dropdown pe-3">
+            <span class="ps-2"><a class="btn btn-primary" href="login.html" role="button">Login</a>
+            
+          <!-- End Profile Iamge Icon -->
+        </li><!-- End Profile Nav -->
+     </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header>
+  
+  <main id="main2" class="main2">
+    <center><div class="pagetitle">
+      <div class="card-body pb-0">
+        
+        <button type="button" class="btn btn-secondary  w-25" disabled>Jadwal</button>&nbsp;&nbsp;
+        <a class="btn btn-primary" href="indexPosisi.html" role="button">Posisi</a>
+      </div>
+      </center>
+      <nav>
+        <ol class="breadcrumb">
+        </ol>
+      </nav>
+    </div>
+        
+    <section class="section dashboard">
+      <div class="row justify-content-center">
+          <div class="card col-lg-10">
+            <div class="filter">
+            </div>
+
+              <!-- Area Chart -->
+          <div class="col-lg-12 col-lg-7">
+            <div class="card shadow mb-4">
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr >
+                                <th colspan="4" scope="col"><center>
+                                <button type="button" class="btn btn-outline-primary w-100 " disabled>Jadwal Bipol</button></center></th>
+                            </tr>
+                            <tr>
+                              
+                              <th scope="col">Bipol</th>
+                              <th scope="col">Halte</th>
+                              <th scope="col">Estimasi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                     Kosong
+                                    </a>
+                                </td>
+                                <td>
+                                    Kosong
+                                    </a>
+                                </td>
+                                <td>
+                                     Kosong
+                                    </a>
+                                </td>
+                            </tr>       
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+              <div id="BipolDashboard" style="min-height: 600px"></div>
+            </div>
+          </div>
+        
+    </section>
+  </main>
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>bipoltracker</span></strong
+      >. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="">Syabab +62</a>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <script src="{{url_for('static', filename='../static/js/apexcharts.min.js')}}"></script>
+  <script src="{{url_for('static', filename='../static/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static', filename='../static/js/chart.min.js')}}"></script>
+  <script src="{{url_for('static', filename='../static/js/echarts.min.js')}}"></script>
+  <script src="{{url_for('static', filename='../static/js/quill.min.js')}}"></script>
+  <script src="{{url_for('static', filename='../static/js/simple-datatables.js')}}"></script>
+  <script src="{{url_for('static', filename='../static/js/tinymce.min.js')}}"></script>
+  <script src="{{url_for('static', filename='../static/js/validate.js')}}"></script>
+  <script src="{{url_for('static', filename='../static/js/main.js')}}"></script>
+</body>
+</html>
