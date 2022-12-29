@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - Bipol Tracker</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.4.1
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="dashboard.html" class="navbar-brand">
+        <img src="assets/img/logo.png" class="img-fluid" alt="logo" width="100" height="100" class="d-inline-block align-text-top">
+      </a>
+
+    </div><!-- End Logo -->
+
+
+    <nav class="navbar-expand-lg header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/person-fill.svg" alt="Profile" class="rounded-circle">
+          <span class="ps-2">Admin</span>
+          </a><!-- End Profile Iamge Icon -->
+
+
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header>
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="dashboard.html">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="jadwalRead.html">
+          <i class="bi bi-grid"></i>
+          <span>Database Jadwal</span>
+        </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link collapsed" href="posisiRead.html">
+            <i class="bi bi-grid"></i>
+            <span>Database Posisi</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="bipolRead.html">
+            <i class="bi bi-grid"></i>
+            <span>Database Bipol</span>
+          </a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link  " href="driverRead.html">
+          <i class="bi bi-grid"></i>
+          <span>Database Driver</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="index.html">
+          <i class="bi bi-grid"></i>
+          <span>My Website</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="login.html">
+          <i class="bi bi-key"></i>
+          <span>Log Out</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div>
+    <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Database Driver</h5>
+
+                <!-- Default Table -->
+                <table class="table table-hover text-nowrap" style="text-align: left;">
+                  <thead> 
+                    <a href="driverInsert.html" class="btn btn-primary">Add</a>
+                    <br></br>                
+                    <tr>
+                      <th scope="col">Nama</th>
+                      <th scope="col">Username</th>
+                      <th scope="col">Pasword</th>
+                      <th scope="col">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      
+                      <th scope="row"><a href="{{ item }}" class="text-dark"></a></th>
+                      <td><a href="{{ item }}" class="text-dark"></a></td>
+                      <td><a href="{{ item }}" class="text-dark"></a></td>
+                      <td>
+                        <a class="btn btn-warning" href="driverEdit.html">Edit</a>
+                        <a class="btn btn-danger" href="">Delete</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- End Default Table Example -->
+              </div>
+            </div>
+      </section>
+  </main>
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>bipoltracker</span></strong
+      >. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://www.instagram.com/firdausderoock/">Syabab +62</a>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <script src="{{url_for('static', filename='js/apexcharts.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/chart.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/echarts.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/quill.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/simple-datatables.js')}}"></script>
+  <script src="{{url_for('static', filename='js/tinymce.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/validate.js')}}"></script>
+  <script src="{{url_for('static', filename='js/main.js')}}"></script>
+</body>
+</html>
