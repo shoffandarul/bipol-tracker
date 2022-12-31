@@ -44,7 +44,7 @@ async def driver_readbyid(id: int):
 
 @api.post('/api/driver/create')
 async def driver_create(driver: Driver):
-    sqlstr = f"INSERT INTO `driver` (`nama`, `username`, `password`) VALUES ('{driver.nama}', '{driver.username}', '{driver.password}') "
+    sqlstr = f"INSERT INTO `driver` (`id_driver`, `nama`, `username`, `password`) VALUES ('{driver.id_driver}', '{driver.nama}', '{driver.username}', '{driver.password}') "
     output_status = postMethod(sqlstr)
     return output_status
 
@@ -57,7 +57,7 @@ async def driver_update(id: int, driver: Driver, response:Response):
         response.status_code = 422
         return {"detail": "Data Not Found"}
     else:
-        sqlstr = f"UPDATE `driver` SET `nama` = '{driver.nama}', `username` = '{driver.username}', `password` = '{driver.password}' WHERE `driver`.`id_driver` = {id} "
+        sqlstr = f"UPDATE `driver` SET  `id_driver` = '{driver.id_driver}', `nama` = '{driver.nama}', `username` = '{driver.username}', `password` = '{driver.password}' WHERE `driver`.`id_driver` = {id} "
         output_status = postMethod(sqlstr)
         return output_status
 
@@ -107,7 +107,7 @@ async def bipol_readbyid(id: int):
 
 @api.post('/api/bipol/create')
 async def bipol_create(bipol: Bipol):
-    sqlstr = f"INSERT INTO `bipol` (`plat_nomor`, `id_driver`) VALUES ('{bipol.plat_nomor}', '{bipol.id_driver}') "
+    sqlstr = f"INSERT INTO `bipol` (`id_bipol`, `plat_nomor`, `id_driver`) VALUES ('{bipol.id_bipol}', '{bipol.plat_nomor}', '{bipol.id_driver}') "
     output_status = postMethod(sqlstr)
     return output_status
 
@@ -120,7 +120,7 @@ async def bipol_update(id: int, bipol: Bipol, response:Response):
         response.status_code = 422
         return {"detail": "Data Not Found"}
     else:
-        sqlstr = f"UPDATE `bipol` SET `plat_nomor` = '{bipol.plat_nomor}', `id_driver` = '{bipol.id_driver}' WHERE `bipol`.`id_bipol` = {id} "
+        sqlstr = f"UPDATE `bipol` SET `id_bipol` = '{bipol.id_bipol}',  `plat_nomor` = '{bipol.plat_nomor}', `id_driver` = '{bipol.id_driver}' WHERE `bipol`.`id_bipol` = {id} "
         output_status = postMethod(sqlstr)
         return output_status
 
@@ -170,7 +170,7 @@ async def jadwal_readbyid(id: int):
 
 @api.post('/api/jadwal/create')
 async def jadwal_create(jadwal: Jadwal):
-    sqlstr = f"INSERT INTO `jadwal` (`id_bipol`, `hari`, `waktu`, `halte`) VALUES ('{jadwal.id_bipol}', '{jadwal.hari}', '{jadwal.waktu}', '{jadwal.halte}') "
+    sqlstr = f"INSERT INTO `jadwal` (`id_jadwal`, `id_bipol`, `hari`, `waktu`, `halte`) VALUES ('{jadwal.id_jadwal}', '{jadwal.id_bipol}', '{jadwal.hari}', '{jadwal.waktu}', '{jadwal.halte}') "
     print(sqlstr)
     output_status = postMethod(sqlstr)
     return output_status
@@ -184,7 +184,7 @@ async def jadwal_update(id: int, jadwal: Jadwal, response:Response):
         response.status_code = 422
         return {"detail": "Data Not Found"}
     else:
-        sqlstr = f"UPDATE `jadwal` SET `id_bipol` = '{jadwal.id_bipol}', `hari` = '{jadwal.hari}', `waktu` = '{jadwal.waktu}', `halte` = '{jadwal.halte}' WHERE `jadwal`.`id_jadwal` = {id} "
+        sqlstr = f"UPDATE `jadwal` SET `id_jadwal` = '{jadwal.id_jadwal}',  `id_bipol` = '{jadwal.id_bipol}', `hari` = '{jadwal.hari}', `waktu` = '{jadwal.waktu}', `halte` = '{jadwal.halte}' WHERE `jadwal`.`id_jadwal` = {id} "
         output_status = postMethod(sqlstr)
         return output_status
 
