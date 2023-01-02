@@ -97,27 +97,18 @@
                                 <button type="button" class="btn btn-outline-primary w-100 " disabled>Posisi Bipol</button></center></th>
                             </tr>
                             <tr>
-                              
                               <th scope="col">Bipol</th>
                               <th scope="col">Posisi</th>
                               <th scope="col">Waktu</th>
                           </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                     Kosong
-                                    </a>
-                                </td>
-                                <td>
-                                    Kosong
-                                    </a>
-                                </td>
-                                <td>
-                                     Kosong
-                                    </a>
-                                </td>
-                            </tr>       
+                              <tr>
+                                {%for item in database%}
+                                  <td>{{item[0]}}</td>
+                                  <td>{{item[1]}}</td>
+                                  <td>{{item[2]}}</td>
+                              </tr>       
                         </tbody>
                     </table>
                 </div>
