@@ -33,7 +33,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="{{url_for('dashboard')}}" class="navbar-brand">
+      <a href="{{url_for('/')}}" class="navbar-brand">
         <img src="{{url_for('static', filename='img/logo.png')}}" class="img-fluid" alt="logo" width="100" height="100" class="d-inline-block align-text-top">
       </a>
 
@@ -98,7 +98,7 @@
       <li class="nav-item">
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{url_for('login')}}">
+        <a class="nav-link collapsed" href="{{url_for('logout')}}">
           <i class="bi bi-key"></i>
           <span>Log Out</span>
         </a>
@@ -110,8 +110,9 @@
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{url_for('dashboard')}}">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="{{url_for('bipolRead')}}">Database Bipol</a></li>
+          <li class="breadcrumb-item active">Insert</li>
         </ol>
       </nav>
     </div>
