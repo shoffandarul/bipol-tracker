@@ -10,37 +10,31 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../static/img/favicon.png" rel="icon">
+  <link href="{{url_for('static', filename='img/favicon.png')}}" rel="icon">
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../static/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="../static/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="../static/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../static/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='vendor/quill/quill.snow.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='vendor/quill/quill.bubble.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="../static/css/style.css" rel="stylesheet">
+  <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.4.1
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="dashboard.html" class="navbar-brand">
-        <img src="../static/img/logo.png" class="img-fluid" alt="logo" width="100" height="100" class="d-inline-block align-text-top">
+      <a href="{{url_for('dashboard')}}" class="navbar-brand">
+        <img src="{{url_for('static', filename='img/logo.png')}}" class="img-fluid" alt="logo" width="100" height="100" class="d-inline-block align-text-top">
       </a>
 
     </div><!-- End Logo -->
@@ -58,7 +52,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="../static/img/person-fill.svg" alt="Profile" class="rounded-circle">
+            <img src="{{url_for('static', filename='img/person-fill.svg')}}" alt="Profile" class="rounded-circle">
             <span class="ps-2">Admin</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -72,43 +66,43 @@
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-        <a class="nav-link collapsed" href="dashboard.html">
+        <a class="nav-link collapsed" href="{{url_for('dashboard')}}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="jadwalRead.html">
+        <a class="nav-link collapsed" href="{{url_for('jadwalRead')}}">
           <i class="bi bi-grid"></i>
           <span>Database Jadwal</span>
         </a>
       </li>
       <li class="nav-item">
-          <a class="nav-link collapsed" href="posisiRead.html">
+          <a class="nav-link collapsed" href="{{url_for('posisiRead')}}">
             <i class="bi bi-grid"></i>
             <span>Database Posisi</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link collapsed" href="bipolRead.html">
+          <a class="nav-link collapsed" href="{{url_for('bipolRead')}}">
             <i class="bi bi-grid"></i>
             <span>Database Bipol</span>
           </a>
         </li>
       <li class="nav-item">
-        <a class="nav-link  " href="driverRead.html">
+        <a class="nav-link  " href="{{url_for('driverRead')}}">
           <i class="bi bi-grid"></i>
           <span>Database Driver</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed " href="index.html">
+        <a class="nav-link collapsed " href="{{url_for('index')}}">
           <i class="bi bi-grid"></i>
           <span>My Website</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="login.html">
+        <a class="nav-link collapsed" href="{{url_for('login')}}">
           <i class="bi bi-key"></i>
           <span>Log Out</span>
         </a>
@@ -120,7 +114,7 @@
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{url_for('dashboard')}}">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
@@ -135,9 +129,8 @@
   
                 <!-- Default Table -->
         
-                <form action="" method="">
+                <form action="" method="POST">
                     <table class="table table-hover text-nowrap" style="text-align: left;">
-  
                         <tr>
                             <td>Nama</td>
                             <td><input type="text" name="nama" value=""></td>
@@ -151,9 +144,7 @@
                             <td><input type="text" name="password" value=""></td>
                         </tr>
                             <td>
-                              
-                              <input type="submit"> <a href="driverRead.html"></a></td>
-                            
+                              <input type="submit">
                         </tr>
                     
                     </table>
@@ -165,24 +156,15 @@
             </div>
       </section>
   </main>
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>bipoltracker</span></strong
-      >. All Rights Reserved
-    </div>
-    <div class="credits">
-      Designed by <a href="https://www.instagram.com/firdausderoock/">Syabab +62</a>
-    </div>
-  </footer>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  <script src="{{url_for('static', filename='../static/js/apexcharts.min.js')}}"></script>
-  <script src="{{url_for('static', filename='../static/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{url_for('static', filename='../static/js/chart.min.js')}}"></script>
-  <script src="{{url_for('static', filename='../static/js/echarts.min.js')}}"></script>
-  <script src="{{url_for('static', filename='../static/js/quill.min.js')}}"></script>
-  <script src="{{url_for('static', filename='../static/js/simple-datatables.js')}}"></script>
-  <script src="{{url_for('static', filename='../static/js/tinymce.min.js')}}"></script>
-  <script src="{{url_for('static', filename='../static/js/validate.js')}}"></script>
-  <script src="{{url_for('static', filename='../static/js/main.js')}}"></script>
+  <script src="{{url_for('static', filename='js/apexcharts.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/chart.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/echarts.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/quill.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/simple-datatables.js')}}"></script>
+  <script src="{{url_for('static', filename='js/tinymce.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/validate.js')}}"></script>
+  <script src="{{url_for('static', filename='js/main.js')}}"></script>
 </body>
 </html>
