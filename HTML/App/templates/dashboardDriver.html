@@ -66,14 +66,40 @@
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="{{url_for('dashboardDriver')}}">
+        <a class="nav-link collapsed" href="{{url_for('jadwalRead')}}">
           <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+          <span>Database Jadwal</span>
         </a>
       </li>
       <li class="nav-item">
+          <a class="nav-link collapsed" href="{{url_for('posisiRead')}}">
+            <i class="bi bi-grid"></i>
+            <span>Database Posisi</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="{{url_for('bipolRead')}}">
+            <i class="bi bi-grid"></i>
+            <span>Database Bipol</span>
+          </a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="{{url_for('driverRead')}}">
+          <i class="bi bi-grid"></i>
+          <span>Database Driver</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed " href="{{url_for('index')}}">
+          <i class="bi bi-grid"></i>
+          <span>My Website</span>
+        </a>
+      </li>
+      <li class="nav-item">
+      </li>
+      <li class="nav-item">
         <a class="nav-link collapsed" href="{{url_for('login')}}">
-          <i class="bi bi-person-fill"></i>
+          <i class="bi bi-key"></i>
           <span>Log Out</span>
         </a>
       </li>

@@ -160,9 +160,6 @@ def bipolDelete(id):
 
     return redirect(url_for('bipol'))
 
-@application.route('/dashboard')
-def dashboard():
-    return render_template('dashboard.html')
 
 # @application.route('/dashboardDriver')
 # def dashboardDriver():
