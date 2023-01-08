@@ -24,23 +24,15 @@
   <link href="../static/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="../static/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../static/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
   <link href="../static/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.4.1
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="navbar-brand">
+      <a href="/" class="navbar-brand">
         <img src="../static/img/logo.png" class="img-fluid" alt="logo" width="100" height="100" class="d-inline-block align-text-top">
       </a>
 
@@ -50,9 +42,7 @@
     <nav class="navbar-expand-lg header-nav ms-auto">
       <ul class="d-flex align-items-center">
         <li class="nav-item dropdown pe-3">
-            <span class="ps-2"><a class="btn btn-primary" href="login.html" role="button">Login</a>
-            
-          <!-- End Profile Iamge Icon -->
+            <span class="ps-2"><a class="btn btn-primary" href="/login" role="button">Login</a>
         </li><!-- End Profile Nav -->
      </ul>
     </nav><!-- End Icons Navigation -->
@@ -63,8 +53,8 @@
     <center><div class="pagetitle">
       <div class="card-body pb-0">
         
-        <button type="button" class="btn btn-secondary  w-25" disabled>Jadwal</button>&nbsp;&nbsp;
-        <a class="btn btn-primary" href="indexPosisi.html" role="button">Posisi</a>
+        <button type="button" class="btn btn-primary  w-25" disabled>Jadwal</button>&nbsp;&nbsp;
+        <a class="btn btn-secondary" href="/" role="button">Posisi</a>
       </div>
       </center>
       <nav>
@@ -76,9 +66,7 @@
     <section class="section dashboard">
       <div class="row justify-content-center">
           <div class="card col-lg-10">
-            <div class="filter">
-            </div>
-
+            <div class="filter"></div>
               <!-- Area Chart -->
           <div class="col-lg-12 col-lg-7">
             <div class="card shadow mb-4">
@@ -88,44 +76,39 @@
                     <table class="table">
                         <thead>
                             <tr >
-                                <th colspan="4" scope="col"><center>
-                                <button type="button" class="btn btn-outline-primary w-100 " disabled>Jadwal Bipol</button></center></th>
+                              <th colspan="4" scope="col">
+                                <center><button type="button" class="btn btn-outline-primary w-100 " disabled>Jadwal Bipol</button></center>
+                              </th>
                             </tr>
                             <tr>
-                              
                               <th scope="col">Bipol</th>
                               <th scope="col">Halte</th>
                               <th scope="col">Estimasi</th>
-                          </tr>
+                            </tr>
                         </thead>
                         <tbody>
-                              <tr>
-                                  {%for item in database%}
-                                  <td>{{item[0]}}</td>
-                                  <td>{{item[1]}}</td>
-                                  <td>{{item[2]}}</td>
-                              </tr>       
+                          {% for item in data_jadwal %}
+                            <tr>
+                                <td>
+                                  {{ item["id_bipol"] }} - {{ item["plat_nomor"] }}
+                                </td>
+                                <td>
+                                  {{ item["halte"] }}
+                                </td>
+                                <td>
+                                  {{ item["waktu"] }}
+                                </td>
+                            </tr>   
+                          {% endfor %}  
+                          {{today}}  
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        
-              <div id="BipolDashboard" style="min-height: 600px"></div>
-            </div>
-          </div>
-        
     </section>
   </main>
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>bipoltracker</span></strong
-      >. All Rights Reserved
-    </div>
-    <div class="credits">
-      Designed by <a href="">Syabab +62</a>
-    </div>
-  </footer>
+  
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <script src="{{url_for('static', filename='../static/js/apexcharts.min.js')}}"></script>
   <script src="{{url_for('static', filename='../static/js/bootstrap.bundle.min.js')}}"></script>

@@ -23,23 +23,15 @@
   <link href="../static/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="../static/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../static/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
   <link href="../static/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.4.1
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  
 </head>
 
 <body>
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="dashboard.html" class="navbar-brand">
+      <a href="/dashboard" class="navbar-brand">
         <img src="../static/img/logo.png" class="img-fluid" alt="logo" width="100" height="100" class="d-inline-block align-text-top">
       </a>
 
@@ -72,43 +64,37 @@
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-        <a class="nav-link collapsed" href="dashboard.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="jadwalRead.html">
+        <a class="nav-link " href="/jadwalRead">
           <i class="bi bi-grid"></i>
           <span>Database Jadwal</span>
         </a>
       </li>
       <li class="nav-item">
-          <a class="nav-link collapsed" href="posisiRead.html">
+          <a class="nav-link collapsed" href="/posisiRead">
             <i class="bi bi-grid"></i>
             <span>Database Posisi</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link collapsed" href="bipolRead.html">
+          <a class="nav-link collapsed" href="/bipolRead">
             <i class="bi bi-grid"></i>
             <span>Database Bipol</span>
           </a>
         </li>
       <li class="nav-item">
-        <a class="nav-link collapsed " href="driverRead.html">
+        <a class="nav-link collapsed " href="/driverRead">
           <i class="bi bi-grid"></i>
           <span>Database Driver</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed " href="index.html">
+        <a class="nav-link collapsed " href="/">
           <i class="bi bi-grid"></i>
           <span>My Website</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="login.html">
+        <a class="nav-link collapsed" href="/logout">
           <i class="bi bi-key"></i>
           <span>Log Out</span>
         </a>
@@ -120,8 +106,8 @@
       <h1>Edit</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="jadwalRead.html">Home</a></li>
-          <li class="breadcrumb-item active">Database</li>
+          <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+          <li class="breadcrumb-item active"><a href="/jadwalRead">Database Jadwal</a></li>
           <li class="breadcrumb-item active">Edit</li>
         </ol>
       </nav>
@@ -137,29 +123,51 @@
 
               <!-- Default Table -->
       
-              <form action="" method="">
+              <form method="post">
                   <table class="table table-hover text-nowrap" style="text-align: left;">
-
                       <tr>
                           <td>Bipol</td>
-                          <td><input type="text" name="bipol" value=""></td>
+                          <td>
+                            <select name="bipol">
+                              <option value="{{ data_selected['id_bipol'] }}" selected hidden>{{ data_selected['id_bipol'] }} - {{ data_selected['plat_nomor'] }}</option>
+                              {% for item in data_bipol %}
+                              <option value="{{ item['id_bipol'] }}">{{ item["id_bipol"] }} - {{ item["plat_nomor"] }}</option>
+                              {% endfor %}
+                            </select>
+                          </td>
                       </tr>
                       <tr>
                           <td>Halte</td>
-                          <td><input type="text" name="halte" value=""></td>
+                          <td>
+                            <select name="halte" id="halte">
+                              <option value="{{ data_selected['halte'] }}" hidden>{{ data_selected['halte'] }}</option>
+                              <option value="Stasiun UI">Stasiun UI</option>
+                              <option value="Pondok Cina">Pondok Cina</option>
+                              <option value="PNJ">PNJ</option>
+                            </select>
+                          </td>
+                      </tr>
+                      <tr>
+                        <td>Hari</td>
+                        <td>
+                          <select name="hari">
+                            <option value="{{ data_selected['hari'] }}" hidden>{{ data_selected['hari'] }}</option>
+                            <option value="Senin">Senin</option>
+                            <option value="Selasa">Selasa</option>
+                            <option value="Rabu">Rabu</option>
+                            <option value="Kamis">Kamis</option>
+                            <option value="Jumat">Jumat</option>
+                          </select>
+                        </td>
                       </tr>
                       <tr>
                           <td>Waktu</td>
-                          <td><input type="text" name="waktu" value=""></td>
+                          <td><input type="time" name="waktu" value="{{ data_selected['waktu'] }}"></td>
                       </tr>
-                          <td>
-                            <a href="jadwalRead.html"></a>
-                            <input type="submit"></td>
-                          
+                      <tr>
+                          <td><input type="submit"></td>
                       </tr>
-                  
                   </table>
-                      <p></p>
               </form>
             
               <!-- End Default Table Example -->
@@ -167,15 +175,7 @@
           </div>
     </section>
   </main>
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>bipoltracker</span></strong
-      >. All Rights Reserved
-    </div>
-    <div class="credits">
-      Designed by <a href="https://www.instagram.com/firdausderoock/">Syabab +62</a>
-    </div>
-  </footer>
+  
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <script src="{{url_for('static', filename='../static/js/apexcharts.min.js')}}"></script>
   <script src="{{url_for('static', filename='../static/js/bootstrap.bundle.min.js')}}"></script>
