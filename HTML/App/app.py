@@ -105,9 +105,10 @@ def driverInsert():
         username = request.form['username']				
         password = request.form['password']
 
-        url = "http://localhost:8000/api/driver/create"                    # route API untuk create
+        url = "http://localhost:8000/api/driver/create/"                    # route API untuk create
 
-        data_json=json.dumps({"nama": nama,                     # ubah data jadi format JSON ({"key" : "value"}, {"key" : "value"}, ...)
+        data_json=json.dumps({"id_driver": 0,
+                              "nama": nama,                     # ubah data jadi format JSON ({"key" : "value"}, {"key" : "value"}, ...)
                               "username": username,                                 # "key"   = harus sama dengan yang ada di FastAPI > App > schema.py
                               "password": password                           # "value" = dari request form HTML
                             })
@@ -124,7 +125,7 @@ def driverInsert():
 @application.route('/driverEdit/<int:id>', methods=['GET', 'POST'])
 def driverEdit(id):
     if request.method =='GET':
-        response = requests.get("http://localhost:8000/api/driver"+str(id))           # request data yang lama dari API
+        response = requests.get("http://localhost:8000/api/driver/"+str(id))           # request data yang lama dari API
         return render_template('driverEdit.html', data=response.json()['results'])
 
     if request.method == 'POST':
@@ -132,9 +133,10 @@ def driverEdit(id):
         username = request.form['username']				
         password = request.form['password']
 
-        url = "http://localhost:8000/api/driver/update"                    # route API untuk create
+        url = "http://localhost:8000/api/driver/update/"+str(id)                    # route API untuk create
 
-        data_json=json.dumps({"nama": nama,                     # ubah data jadi format JSON ({"key" : "value"}, {"key" : "value"}, ...)
+        data_json=json.dumps({"id_driver": id,
+                              "nama": nama,                     # ubah data jadi format JSON ({"key" : "value"}, {"key" : "value"}, ...)
                               "username": username,                                 # "key"   = harus sama dengan yang ada di FastAPI > App > schema.py
                               "password": password                           # "value" = dari request form HTML
                             })
@@ -145,20 +147,20 @@ def driverEdit(id):
         if response.status_code == 200: flash('Berhasil mengupdate data!')              # feedback ke user
         else: flash('Gagal mengupdate data!')
         
-        return redirect(url_for('driver'))
+        return redirect(url_for('driverRead'))
 
 
 @application.route('/driverDelete/<int:id>')
 def driverDelete(id):
 
-    url = "http://localhost:8000/api/driver/delete" + str(id)         # route API untuk delete + id terpilih
+    url = "http://localhost:8000/api/driver/delete/" + str(id)         # route API untuk delete + id terpilih
 
     response = requests.delete(url)                                     # request DELETE ke API dengan id terpilih
     
     if response.status_code == 200: flash('Berhasil menghapus data!')   # feedback ke user
     else: flash('Gagal menghapus data!')
 
-    return redirect(url_for('driver'))
+    return redirect(url_for('driverRead'))
 
 @application.route('/bipolRead')  
 def bipolRead():
@@ -209,7 +211,7 @@ def bipolEdit(id):
         platnomor = request.form['platnomor']				
         driver = request.form['driver']
 
-        url = "http://localhost:8000/api/bipol/update" + str(id)                     # route API untuk update + id terpilih
+        url = "http://localhost:8000/api/bipol/update/" + str(id)                     # route API untuk update + id terpilih
 
         data_json=json.dumps({"id_bipol": id,                     # ubah data jadi format JSON ({"key" : "value"}, {"key" : "value"}, ...)
                             "plat_nomor": platnomor,                                 # "key"   = harus sama dengan yang ada di FastAPI > App > schema.py
@@ -222,20 +224,20 @@ def bipolEdit(id):
         if response.status_code == 200: flash('Berhasil mengupdate data!')              # feedback ke user
         else: flash('Gagal mengupdate data!')
         
-        return redirect(url_for('bipol'))
+        return redirect(url_for('bipolRead'))
 
 
 @application.route('/bipolDelete/<int:id>')
 def bipolDelete(id):
 
-    url = "http://localhost:8000/api/bipol/delete" + str(id)         # route API untuk delete + id terpilih
+    url = "http://localhost:8000/api/bipol/delete/" + str(id)         # route API untuk delete + id terpilih
 
     response = requests.delete(url)                                     # request DELETE ke API dengan id terpilih
     
     if response.status_code == 200: flash('Berhasil menghapus data!')   # feedback ke user
     else: flash('Gagal menghapus data!')
 
-    return redirect(url_for('bipol'))
+    return redirect(url_for('bipolRead'))
 
 
 @application.route('/jadwalRead')
@@ -446,12 +448,20 @@ def posisiDelete(id):
     # display posisi 
     return redirect('../posisiRead')
 
+user = ''
+bipolid = 0
+
 @application.route('/login', methods=['GET', 'POST'])
 def login():
+    global user
     # send get request
     all_data_driver_str = (requests.get('http://localhost:8000/api/driver/')).text # ambil data dari api
     all_data_driver = json.loads(all_data_driver_str)["results"]
     if request.method == 'GET':
+        if user == 'admin':
+            return redirect('../jadwalRead')
+        elif user != '':
+            return redirect('../dashboardDriver')
         # display login page
         return render_template('login.html')
     else:
@@ -460,12 +470,14 @@ def login():
         password = request.form['passwd']
         # authentication admin
         if username == 'admin' and password == '123':
+            user = 'admin'
             # display dahsboardAdmin page
             return redirect('../jadwalRead')
         # authentication driver
         for i in all_data_driver:
             if i["username"] == username:
                 if i["password"] == password:
+                    user = username
                     # display dahsboardDriver page
                     return redirect('../dashboardDriver')
         # display login page
@@ -473,11 +485,88 @@ def login():
 
 @application.route('/logout', methods=['GET', 'POST'])
 def logout():
+    global user, bipolid
+    user = ''
+    bipolid = 0
     return redirect('/')
-    
+
 @application.route('/dashboardDriver', methods=['GET', 'POST'])
 def dashboardDriver():
-    return render_template('dashboardDriver.html')
+    global user, bipolid
+    # send get request
+    all_data_driver_str = (requests.get('http://localhost:8000/api/driver/')).text # ambil data dari api
+    all_data_driver = json.loads(all_data_driver_str)["results"]
+    # send get request
+    all_data_bipol_str = (requests.get('http://localhost:8000/api/bipol/')).text # ambil data dari api
+    all_data_bipol = json.loads(all_data_bipol_str)["results"]
+    for i in all_data_driver:
+        if i['username'] == user:
+            driverid = i['id_driver']
+            for j in all_data_bipol:
+                if j['id_driver'] == driverid:
+                    bipolid = j['id_bipol']
+                    active1 = 'btn-primary'
+                    active2 = 'btn-secondary'
+                    return render_template('dashboardDriver.html', id=bipolid, active1=active1, active2=active2)
+    return redirect('../')
+
+@application.route('/dashboardDriverOff', methods=['GET', 'POST'])
+def dashboardDriverOff():
+    global bipolid
+    id = bipolid
+    payload = json.dumps ({
+        "id_bipol": id,
+        "posisi": '-',
+        "waktu": '',
+        "kapasitas": '-'
+    })
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    url = "http://localhost:8000/api/posisi/update/" + str(id)
+    response = requests.request("PUT", url, headers=headers, data=payload)
+    print(response.text)
+    active1 = 'btn-secondary'
+    active2 = 'btn-primary'
+    able = 'disabled'
+    return render_template('dashboardDriver.html', id=0, active1=active1, active2=active2, able=able)
+
+@application.route('/<int:id>/<int:i>/<int:j>')
+def updateDriver(id, i, j):
+    data_posisi = (requests.get('http://localhost:8000/api/posisi/'+str(id))).text # ambil data dari api
+    if id == 0:
+        return redirect('../../dashboardDriverOff')
+    elif i != 0:
+        if i == 1:
+            posisi = 'Stasiun UI'
+        elif i == 2:
+            posisi = 'Pondok Cina'
+        else:
+            posisi = 'PNJ'
+        kapasitas = json.loads(data_posisi)["results"][0]['kapasitas']        
+    else:
+        if j == 1:
+            kapasitas = 'Kosong'
+        elif j == 2:
+            kapasitas = 'Tersedia'
+        else:
+            kapasitas = 'Penuh'
+        posisi = json.loads(data_posisi)["results"][0]['posisi']        
+    current_datetime = datetime.now()
+    waktu = str(current_datetime.strftime("%H:%M")) + ':00'
+    payload = json.dumps ({
+        "id_bipol": id,
+        "posisi": posisi,
+        "waktu": waktu,
+        "kapasitas": kapasitas
+    })
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    url = "http://localhost:8000/api/posisi/update/" + str(id)
+    response = requests.request("PUT", url, headers=headers, data=payload)
+    print(response.text)
+    return redirect('../../dashboardDriver')
 
 if __name__ == '__main__':
     application.run(debug=True)

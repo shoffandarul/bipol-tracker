@@ -33,7 +33,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="{{url_for('\')}}" class="navbar-brand">
+      <a href="/" class="navbar-brand">
         <img src="{{url_for('static', filename='img/logo.png')}}" class="img-fluid" alt="logo" width="100" height="100" class="d-inline-block align-text-top">
       </a>
 
@@ -66,27 +66,9 @@
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{url_for('jadwalRead')}}">
+        <a class="nav-link collapsed" href="{{url_for('dashboardDriver')}}">
           <i class="bi bi-grid"></i>
-          <span>Database Jadwal</span>
-        </a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link collapsed" href="{{url_for('posisiRead')}}">
-            <i class="bi bi-grid"></i>
-            <span>Database Posisi</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="{{url_for('bipolRead')}}">
-            <i class="bi bi-grid"></i>
-            <span>Database Bipol</span>
-          </a>
-        </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed " href="{{url_for('driverRead')}}">
-          <i class="bi bi-grid"></i>
-          <span>Database Driver</span>
+          <span>Dashboard Driver</span>
         </a>
       </li>
       <li class="nav-item">
@@ -124,15 +106,18 @@
             </div>
 
             <div class="card-body pb-0">
-              <h5 class="card-title">Dashboard<span> | Today</span></h5>
+              <h5 class="card-title">Dashboard<span> | Driver</span></h5>
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-primary active btn-sm">
-                  <input type="radio" name="options" id="option1" autocomplete="off" checked> Aktif
-                </label>
-                <label class="btn btn-primary btn-sm">
-                  <input type="radio" name="options" id="option2" autocomplete="off"> Tidak Aktif
+                <label class="btn {{active1}} active btn-sm">
+                  <a href="/dashboardDriver" style="color: #ffffff;">Aktif</a>
                 </label>
               </div>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn {{active2}} active btn-sm">
+                  <a href="/dashboardDriverOff" style="color: #ffffff;">Tidak Aktif</a>
+                </label>
+              </div>
+            </div>
 
               <!-- Area Chart -->
           <div class="col-xl-12 col-lg-7">
@@ -144,59 +129,58 @@
                         <thead>
                             <tr>
                                 <th scope="col"><center><button type="button" class="btn btn-outline-primary w-100 btn-lg btn-block " disabled>Posisi</button></center></th>
-                                <th scope="col"><center><button type="button" class="btn btn-outline-primary w-100 btn-lg btn-block" disabled>Tingkat Keramaian</button></center></th>
+                                <th scope="col"><center><button type="button" class="btn btn-outline-primary w-100 btn-lg btn-block" disabled>Status</button></center></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><a href="">
-                                  <center><button type="button" class="btn btn-primary w-25 btn-lg btn-block">Halte UI</button>
-                                    </a></td>
                                 <td>
-                                    <a href="">
-                                     <center> <button type="button" class="btn btn-success w-25 btn-lg btn-block">Kosong</button></center>
-                                    </a>
+                                  <a href="/{{id}}/1/0">
+                                  <center>
+                                    <button type="button" class="btn btn-primary w-100 btn-lg btn-block" {{able}}>Stasiun UI</button>
+                                  </center>
+                                  </a>
+                                </td>
+                                <td>
+                                  <a href="/{{id}}/0/1">
+                                  <center>
+                                    <button type="button" class="btn btn-success w-100 btn-lg btn-block" {{able}}>Kosong</button>
+                                  </center>
+                                  </a>
                                 </td>
                             </tr>
-
                             <tr>
-                              <td><a href="">
-                              <center><button type="button" class="btn btn-primary w-25 btn-lg btn-block">Halte UI</button></center>
-                                  </a></td>
-                             </tr>
-
-                             <tr>
-                              <td><a href="">
-                              <center><button type="button" class="btn btn-primary w-25 btn-lg btn-block">Halte UI</button></center>
-                                  </a></td>
-                              <td>
-                                  <a href="">
-                                  <center><button type="button" class="btn btn-warning w-25 btn-lg btn-block">Tersedia</button></center>
+                                <td>
+                                  <a href="/{{id}}/2/0" disabled>
+                                  <center>
+                                    <button type="button" class="btn btn-primary w-100 btn-lg btn-block" {{able}}>Pondok Cina</button>
+                                  </center>
                                   </a>
-                              </td>
-                             </tr>
-                            
-                             <tr>
-                              <td><a href="">
-                              <center><button type="button" class="btn btn-primary w-25 btn-lg btn-block">Halte UI</button></center>
-                                  </a></td>
-                             
-                             </tr>
-                             <tr>
-                              <td><a href="">
-                              <center><button type="button" class="btn btn-primary w-25 btn-lg btn-block">Halte UI</button></center>
-                                  </a></td>
-                              <td>
-                                  <a href="">
-                                  <center><button type="button" class="btn btn-danger w-25 btn-lg btn-block">Penuh</button></center>
+                                </td>
+                                <td>
+                                  <a href="/{{id}}/0/2">
+                                  <center>
+                                    <button type="button" class="btn btn-warning w-100 btn-lg btn-block" {{able}}>Tersedia</button>
+                                  </center>
                                   </a>
-                              </td>
-                             </tr>
-                             <tr>
-                              <td><a href="">
-                              <center><button type="button" class="btn btn-primary w-25 btn-lg btn-block">Halte UI</button></center>
-                                  </a></td> 
-                             </tr>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                  <a href="/{{id}}/3/0">
+                                  <center>
+                                    <button type="button" class="btn btn-primary w-100 btn-lg btn-block" {{able}}>Halte PNJ</button>
+                                  </center>
+                                  </a>
+                                </td>
+                                <td>
+                                  <a href="/{{id}}/0/3">
+                                  <center>
+                                    <button type="button" class="btn btn-danger w-100 btn-lg btn-block" {{able}}>Penuh</button>
+                                  </center>
+                                  </a>
+                                </td>
+                            </tr>
 
                         </tbody>
                     </table>
