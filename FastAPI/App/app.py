@@ -248,7 +248,7 @@ async def posisi_update(id: int, posisi: Posisi, response:Response):
         response.status_code = 422
         return {"detail": "Data Not Found"}
     else:
-        sqlstr = f"UPDATE `posisi` SET `id_bipol` = '{posisi.id_bipol}', `posisi` = '{posisi.posisi}', `waktu` = '{posisi.waktu}', `kapasitas` = '{posisi.kapasitas}' WHERE `posisi`.`id_bipol` = {id} "
+        sqlstr = f"UPDATE `posisi` SET `posisi` = '{posisi.posisi}', `waktu` = '{posisi.waktu}', `kapasitas` = '{posisi.kapasitas}' WHERE `posisi`.`id_bipol` = {id} "
         output_status = postMethod(sqlstr)
         return output_status
 
