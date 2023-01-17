@@ -54,12 +54,12 @@ def jadwal():
     for i in all_data_jadwal:
         i["waktu"] = format_time(i["waktu"])
     # get data jadwal for today
-    data_jadwal = []
-    for i in all_data_jadwal:
-        try:
-            if i["hari"] == 'Selasa': data_jadwal.append(i)
-        except:
-            break
+    # data_jadwal = []
+    # for i in all_data_jadwal:
+    #     try:
+    #         if i["hari"] == 'Senin': data_jadwal.append(i)
+    #     except:
+    #         break
     # fix format time
     for i in all_data_jadwal:
         i["waktu"] = format_time(i["waktu"])
@@ -274,7 +274,7 @@ def jadwalInsert():
     else :
         # get value
         bipol = request.form['bipol']
-        hari = request.form['hari']
+        # hari = request.form['hari']
         halte = request.form['halte']
         waktu = request.form['waktu']
         # get new id_jadwal
@@ -285,7 +285,7 @@ def jadwalInsert():
         payload = json.dumps ({
             "id_jadwal": id_jadwal,
             "id_bipol": bipol,
-            "hari": hari,
+            "hari": "Senin",
             "waktu": waktu,
             "halte": halte
         })
@@ -295,7 +295,7 @@ def jadwalInsert():
         response = requests.request("POST", url, headers=headers, data=payload)
         print(response.text)
         # display jadwalInsert page
-        return render_template('jadwalInsert.html', data_bipol=all_data_bipol)
+        return redirect('../jadwalRead')
 
 @application.route('/jadwalEdit/<int:id>', methods=['GET', 'POST'])
 def jadwalEdit(id):
@@ -323,14 +323,14 @@ def jadwalEdit(id):
         # get value
         id_bipol = request.form['bipol']
         halte = request.form['halte']
-        hari = request.form['hari']
+        # hari = request.form['hari']
         waktu = request.form['waktu']
         # send put request jadwal
         url = "http://localhost:8000/api/jadwal/update/" + str(id)
         payload = json.dumps ({
             "id_jadwal": id,
             "id_bipol": id_bipol,
-            "hari": hari,
+            "hari": "Senin",
             "waktu": waktu+':00',
             "halte": halte
         })
@@ -338,7 +338,7 @@ def jadwalEdit(id):
         response = requests.request("PUT", url, headers=headers, data=payload)
         print(response.text)
         # display jadwalEdit page
-        return redirect('../jadwalEdit/' + str(id))
+        return redirect('../jadwalRead')
 
 @application.route('/jadwalDelete/<int:id>')
 def jadwalDelete(id):
@@ -398,7 +398,7 @@ def posisiInsert():
         response = requests.request("POST", url, headers=headers, data=payload)
         print(response.text)
         # display jadwalInsert page
-        return render_template('posisiInsert.html', data_bipol=all_data_bipol)
+        return redirect('../posisiRead')
 
 @application.route('/posisiEdit/<int:id>', methods=['GET', 'POST'])
 def posisiEdit(id):
@@ -418,7 +418,7 @@ def posisiEdit(id):
         return render_template('posisiEdit.html',data_selected=data_selected, data_bipol=all_data_bipol)
     elif request.method == 'POST':
         # get value
-        id_bipol = request.form['bipol']
+        id_bipol = id
         posisi = request.form['posisi']
         kapasitas = request.form['kapasitas']
         current_datetime = datetime.now()
@@ -437,7 +437,7 @@ def posisiEdit(id):
         response = requests.request("PUT", url, headers=headers, data=payload)
         print(response.text)
         # display posisiEdit page
-        return redirect('../posisiEdit/' + str(id))
+        return redirect('../posisiRead')
 
 @application.route('/posisiDelete/<int:id>')
 def posisiDelete(id):
@@ -448,20 +448,13 @@ def posisiDelete(id):
     # display posisi 
     return redirect('../posisiRead')
 
-user = ''
-bipolid = 0
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
-    global user
     # send get request
     all_data_driver_str = (requests.get('http://localhost:8000/api/driver/')).text # ambil data dari api
     all_data_driver = json.loads(all_data_driver_str)["results"]
     if request.method == 'GET':
-        if user == 'admin':
-            return redirect('../jadwalRead')
-        elif user != '':
-            return redirect('../dashboardDriver')
         # display login page
         return render_template('login.html')
     else:
@@ -470,29 +463,23 @@ def login():
         password = request.form['passwd']
         # authentication admin
         if username == 'admin' and password == '123':
-            user = 'admin'
             # display dahsboardAdmin page
             return redirect('../jadwalRead')
         # authentication driver
         for i in all_data_driver:
             if i["username"] == username:
                 if i["password"] == password:
-                    user = username
                     # display dahsboardDriver page
-                    return redirect('../dashboardDriver')
+                    return redirect('../dashboardDriver/'+username)
         # display login page
         return render_template('login.html')
 
 @application.route('/logout', methods=['GET', 'POST'])
 def logout():
-    global user, bipolid
-    user = ''
-    bipolid = 0
     return redirect('/')
 
-@application.route('/dashboardDriver', methods=['GET', 'POST'])
-def dashboardDriver():
-    global user, bipolid
+@application.route('/dashboardDriver/<string:username>', methods=['GET', 'POST'])
+def dashboardDriver(username):
     # send get request
     all_data_driver_str = (requests.get('http://localhost:8000/api/driver/')).text # ambil data dari api
     all_data_driver = json.loads(all_data_driver_str)["results"]
@@ -500,20 +487,21 @@ def dashboardDriver():
     all_data_bipol_str = (requests.get('http://localhost:8000/api/bipol/')).text # ambil data dari api
     all_data_bipol = json.loads(all_data_bipol_str)["results"]
     for i in all_data_driver:
-        if i['username'] == user:
+        if i['username'] == username:
+            print(i['username'])
+            print(username)
             driverid = i['id_driver']
             for j in all_data_bipol:
                 if j['id_driver'] == driverid:
                     bipolid = j['id_bipol']
                     active1 = 'btn-primary'
                     active2 = 'btn-secondary'
-                    return render_template('dashboardDriver.html', id=bipolid, active1=active1, active2=active2)
+                    print(bipolid)
+                    return render_template('dashboardDriver.html', username=username, id=bipolid, active1=active1, active2=active2)
     return redirect('../')
 
-@application.route('/dashboardDriverOff', methods=['GET', 'POST'])
-def dashboardDriverOff():
-    global bipolid
-    id = bipolid
+@application.route('/dashboardDriverOff/<string:username>/<int:id>', methods=['GET', 'POST'])
+def dashboardDriverOff(username,id):
     payload = json.dumps ({
         "id_bipol": id,
         "posisi": '-',
@@ -529,10 +517,10 @@ def dashboardDriverOff():
     active1 = 'btn-secondary'
     active2 = 'btn-primary'
     able = 'disabled'
-    return render_template('dashboardDriver.html', id=0, active1=active1, active2=active2, able=able)
+    return render_template('dashboardDriver.html', id=0, username=username, active1=active1, active2=active2, able=able)
 
-@application.route('/<int:id>/<int:i>/<int:j>')
-def updateDriver(id, i, j):
+@application.route('/<string:username>/<int:id>/<int:i>/<int:j>')
+def updateDriver(username,id, i, j):
     data_posisi = (requests.get('http://localhost:8000/api/posisi/'+str(id))).text # ambil data dari api
     if id == 0:
         return redirect('../../dashboardDriverOff')
@@ -566,7 +554,9 @@ def updateDriver(id, i, j):
     url = "http://localhost:8000/api/posisi/update/" + str(id)
     response = requests.request("PUT", url, headers=headers, data=payload)
     print(response.text)
-    return redirect('../../dashboardDriver')
+    
+    return redirect('../../../dashboardDriver/'+username)
+    # return redirect('../../dashboardDriver/'+username)
 
 if __name__ == '__main__':
     application.run(debug=True)

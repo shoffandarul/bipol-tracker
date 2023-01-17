@@ -66,7 +66,7 @@
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{url_for('dashboardDriver')}}">
+        <a class="nav-link collapsed" href="/dashboardDriver/{{username}}">
           <i class="bi bi-grid"></i>
           <span>Dashboard Driver</span>
         </a>
@@ -89,11 +89,12 @@
   </aside>
   <main id="main" class="main">
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>Dashboard Driver</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{url_for('index')}}">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item active">Dashboard Driver</li>
+          <li class="breadcrumb-item">{{ username }}</li>
         </ol>
       </nav>
     </div>
@@ -106,15 +107,15 @@
             </div>
 
             <div class="card-body pb-0">
-              <h5 class="card-title">Dashboard<span> | Driver</span></h5>
+              <h5 class="card-title">Dashboard<span> | Driver Bipol {{ id }}</span></h5>
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn {{active1}} active btn-sm">
-                  <a href="/dashboardDriver" style="color: #ffffff;">Aktif</a>
+                  <a href="/dashboardDriver/{{username}}" style="color: #ffffff;">Aktif</a>
                 </label>
               </div>
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn {{active2}} active btn-sm">
-                  <a href="/dashboardDriverOff" style="color: #ffffff;">Tidak Aktif</a>
+                  <a href="/dashboardDriverOff/{{username}}/{{id}}" style="color: #ffffff;">Tidak Aktif</a>
                 </label>
               </div>
             </div>
@@ -135,14 +136,14 @@
                         <tbody>
                             <tr>
                                 <td>
-                                  <a href="/{{id}}/1/0">
+                                  <a href="/{{username}}/{{id}}/1/0">
                                   <center>
                                     <button type="button" class="btn btn-primary w-100 btn-lg btn-block" {{able}}>Stasiun UI</button>
                                   </center>
                                   </a>
                                 </td>
                                 <td>
-                                  <a href="/{{id}}/0/1">
+                                  <a href="/{{username}}/{{id}}/0/1">
                                   <center>
                                     <button type="button" class="btn btn-success w-100 btn-lg btn-block" {{able}}>Kosong</button>
                                   </center>
@@ -151,14 +152,14 @@
                             </tr>
                             <tr>
                                 <td>
-                                  <a href="/{{id}}/2/0" disabled>
+                                  <a href="/{{username}}/{{id}}/2/0" disabled>
                                   <center>
                                     <button type="button" class="btn btn-primary w-100 btn-lg btn-block" {{able}}>Pondok Cina</button>
                                   </center>
                                   </a>
                                 </td>
                                 <td>
-                                  <a href="/{{id}}/0/2">
+                                  <a href="/{{username}}/{{id}}/0/2">
                                   <center>
                                     <button type="button" class="btn btn-warning w-100 btn-lg btn-block" {{able}}>Tersedia</button>
                                   </center>
@@ -167,14 +168,14 @@
                             </tr>
                             <tr>
                                 <td>
-                                  <a href="/{{id}}/3/0">
+                                  <a href="/{{username}}/{{id}}/3/0">
                                   <center>
                                     <button type="button" class="btn btn-primary w-100 btn-lg btn-block" {{able}}>Halte PNJ</button>
                                   </center>
                                   </a>
                                 </td>
                                 <td>
-                                  <a href="/{{id}}/0/3">
+                                  <a href="/{{username}}/{{id}}/0/3">
                                   <center>
                                     <button type="button" class="btn btn-danger w-100 btn-lg btn-block" {{able}}>Penuh</button>
                                   </center>
