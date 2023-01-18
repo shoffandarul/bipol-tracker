@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect, flash
 from datetime import date, datetime
-import requests, json
+import requests, json, hashlib
 
 application = Flask(__name__)
 application.secret_key = "teuayanunyahoisina"
@@ -239,6 +239,7 @@ def bipolDelete(id):
 
     return redirect(url_for('bipolRead'))
 
+# Eza Musyarof
 
 @application.route('/jadwalRead')
 def jadwalRead():
@@ -469,8 +470,10 @@ def login():
         for i in all_data_driver:
             if i["username"] == username:
                 if i["password"] == password:
+                    auth = hashlib.md5(password.encode()).hexdigest()
+                    print(auth)
                     # display dahsboardDriver page
-                    return redirect('../dashboardDriver/'+username)
+                    return redirect('../dashboardDrivers/'+username+'/'+auth)
         # display login page
         return render_template('login.html')
 
@@ -499,6 +502,34 @@ def dashboardDriver(username):
                     print(bipolid)
                     return render_template('dashboardDriver.html', username=username, id=bipolid, active1=active1, active2=active2)
     return redirect('../')
+
+# login dengan autentikasi
+@application.route('/dashboardDrivers/<string:username>/<string:auth>', methods=['GET', 'POST'])
+def dashboardDrivers(username,auth):
+    # send get request
+    all_data_driver_str = (requests.get('http://localhost:8000/api/driver/')).text # ambil data dari api
+    all_data_driver = json.loads(all_data_driver_str)["results"]
+    # send get request
+    all_data_bipol_str = (requests.get('http://localhost:8000/api/bipol/')).text # ambil data dari api
+    all_data_bipol = json.loads(all_data_bipol_str)["results"]
+    for i in all_data_driver:
+        if i['username'] == username:
+            print(i['username'])
+            auth_code = hashlib.md5(i['password'].encode()).hexdigest()
+            print(username)
+            driverid = i['id_driver']
+            for j in all_data_bipol:
+                if j['id_driver'] == driverid:
+                    bipolid = j['id_bipol']
+                    active1 = 'btn-primary'
+                    active2 = 'btn-secondary'
+                    print(bipolid)
+
+                    # authentication
+                    if auth_code == auth:
+                        return render_template('dashboardDriver.html', username=username, id=bipolid, active1=active1, active2=active2)
+    return redirect('../')
+
 
 @application.route('/dashboardDriverOff/<string:username>/<int:id>', methods=['GET', 'POST'])
 def dashboardDriverOff(username,id):
@@ -556,7 +587,10 @@ def updateDriver(username,id, i, j):
     print(response.text)
     
     return redirect('../../../dashboardDriver/'+username)
-    # return redirect('../../dashboardDriver/'+username)
+
+
+
+
 
 if __name__ == '__main__':
     application.run(debug=True)
