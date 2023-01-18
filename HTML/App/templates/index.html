@@ -80,7 +80,7 @@
                                 <center><button type="button" class="btn btn-outline-primary w-100 " disabled>Jadwal Bipol</button></center>
                               </th>
                             </tr>
-                            <tr>
+                            <tr class="bg-warning">
                               <th scope="col">Bipol</th>
                               <th scope="col">Halte</th>
                               <th scope="col">Estimasi</th>
@@ -88,7 +88,7 @@
                         </thead>
                         <tbody>
                           {% for item in data_jadwal %}
-                            <tr>
+                            <tr class="table-warning">
                                 <td>
                                   {{ item["id_bipol"] }} - {{ item["plat_nomor"] }}
                                 </td>
@@ -109,8 +109,6 @@
     </section>
   </main>
   
-  <!-- ini komentar -->
-
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <script src="{{url_for('static', filename='../static/js/apexcharts.min.js')}}"></script>
   <script src="{{url_for('static', filename='../static/js/bootstrap.bundle.min.js')}}"></script>

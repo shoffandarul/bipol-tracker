@@ -85,7 +85,7 @@
                                 <th colspan="4" scope="col"><center>
                                 <button type="button" class="btn btn-outline-primary w-100 " disabled>Posisi Bipol</button></center></th>
                             </tr>
-                            <tr>
+                            <tr class="bg-warning">
                               
                               <th scope="col">Bipol</th>
                               <th scope="col">Posisi</th>
@@ -94,7 +94,7 @@
                         </thead>
                         <tbody>
                           {% for item in data_posisi %}
-                            <tr>
+                            <tr class="table-warning">
                                 <td>
                                   {{ item["id_bipol"] }} - {{ item["plat_nomor"] }}
                                 </td>
