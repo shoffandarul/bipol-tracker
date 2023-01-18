@@ -24,3 +24,9 @@ class Posisi(BaseModel):
     posisi: str
     waktu: str
     kapasitas: str
+
+# schema tes individu
+class GaGe(BaseModel):
+    satu: int
+    dua: int
+    tiga: int

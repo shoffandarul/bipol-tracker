@@ -13,6 +13,39 @@ def index():
     return ({'title': 'API for Bipol Tracker', 'developer': 'Kelompok 2 - TMJ 3'})
 
 # ============================================================================== #
+#                               API Tes Individu                                 #
+# ============================================================================== #
+
+@api.post('/api/ganjil_genap')
+async def cek_ganjil_genap(gage: GaGe):
+
+    satu = gage.satu
+    dua = gage.dua
+    tiga = gage.tiga
+
+    hasil_kali = satu * dua * tiga
+    cek_gage = hasil_kali % 2
+
+    if cek_gage == 0:
+        return {"hasil": "genap"}
+    else:
+        return {"hasil": "ganjil"}
+
+    '''
+    contoh input
+    {
+        "satu": 10,
+        "dua": 10,
+        "tiga": 10
+    }
+
+    maka akan menghasilkan return
+    {
+        "hasil": "genap"
+    }
+    '''
+
+# ============================================================================== #
 #                                API for Driver                                  #
 # ============================================================================== #
 
